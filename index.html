@@ -18,7 +18,6 @@
     body {
       margin: 0;
       height: 100vh;
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -46,7 +45,7 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     #yes {
@@ -79,16 +78,22 @@
     noBtn.addEventListener("click", () => {
       noClicks++;
 
-      if (noClicks <= 2) {
+      if (noClicks === 1) {
         noBtn.textContent = "Are you sure?";
-        yesScale += 0.3;
-        noScale -= 0.2;
-
-        yesBtn.style.transform = `scale(${yesScale})`;
-        noBtn.style.transform = `scale(${noScale})`;
-      } else {
+      } 
+      else if (noClicks === 2) {
+        noBtn.textContent = "Think again 😌";
+      } 
+      else {
         noBtn.remove();
+        return;
       }
+
+      yesScale += 0.3;
+      noScale -= 0.2;
+
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform = `scale(${noScale})`;
     });
 
     yesBtn.addEventListener("click", () => {
